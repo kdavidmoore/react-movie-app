@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Hello React!</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+  		<link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css" />
+		<link type="text/css" href="css/normalize.css" />
+		<link type="text/css" href="css/skeleton.css" />
+		<link type="text/css" href="css/styles.css" />
+		<script src="build/react.js"></script>
+		<script src="build/react-dom.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+		<script src="keys.js"></script>
+		<script src="config.js"></script>
+	</head>
+	<body>
+		<div class="container header">
+			<h1>Now Playing</h1>
+			<div id="gallery-one"></div>
+			<div id="gallery-two"></div>
+			<div id="gallery-three"></div>
+			<div id="gallery-four"></div>
+		</div>
+
+		<script type="text/babel">
+			var Poster = React.createClass({
+				getInitialState: function() {
+					return {
+						posterPath: ''
+					};
+				},
+				componentDidMount: function() {
+					this.serverRequest = $.get(NOW_PLAYING_URL + API_KEY, function(data) {
+						this.setState({posterPath: imgBaseUrl + 'w300' + data.results[this.props.item].poster_path});
+					}.bind(this));
+				},
+				componentWillUnmount: function() {
+					this.serverRequest.abort();
+				},
+				render: function() {
+					return (
+						<div className="three columns">
+							<img src={this.state.posterPath} />
+						</div>
+					);
+				}
+			});
+
+			ReactDOM.render(
+			<Poster item="0" />,
+				document.getElementById('gallery-one')
+			);
+			ReactDOM.render(
+			<Poster item="1" />,
+				document.getElementById('gallery-two')
+			);
+			ReactDOM.render(
+			<Poster item="2" />,
+				document.getElementById('gallery-three')
+			);
+			ReactDOM.render(
+			<Poster item="3" />,
+				document.getElementById('gallery-four')
+			);
+		</script>
+	</body>
+</html>
