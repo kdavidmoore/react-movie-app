@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<title>Hello React!</title>
+		<title>Movie App</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
   		<link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css" />
 		<link type="text/css" href="css/normalize.css" />
@@ -18,11 +18,9 @@
 	<body>
 		<div class="container header">
 			<h1>Now Playing</h1>
-			<div id="gallery-one"></div>
-			<div id="gallery-two"></div>
-			<div id="gallery-three"></div>
-			<div id="gallery-four"></div>
 		</div>
+
+		<div id="gallery" class="container"></div>
 
 		<script type="text/babel">
 			var Poster = React.createClass({
@@ -41,28 +39,29 @@
 				},
 				render: function() {
 					return (
-						<div className="three columns">
+						<div>
 							<img src={this.state.posterPath} />
 						</div>
 					);
 				}
 			});
 
+			var Gallery = React.createClass({
+				render: function() {
+					return (
+						<div className="row">
+							<Poster className="three columns" item="0" />
+							<Poster className="three columns" item="1" />
+							<Poster className="three columns" item="2" />
+							<Poster className="three columns" item="3" />
+						</div>
+					);
+				}
+			});
+
 			ReactDOM.render(
-			<Poster item="0" />,
-				document.getElementById('gallery-one')
-			);
-			ReactDOM.render(
-			<Poster item="1" />,
-				document.getElementById('gallery-two')
-			);
-			ReactDOM.render(
-			<Poster item="2" />,
-				document.getElementById('gallery-three')
-			);
-			ReactDOM.render(
-			<Poster item="3" />,
-				document.getElementById('gallery-four')
+				<Gallery />,
+				document.getElementById('gallery')
 			);
 		</script>
 	</body>
