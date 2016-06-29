@@ -1,0 +1,22 @@
+{
+  "name": "react-movie-app",
+  "version": "1.0.0",
+  "description": "Building a movie app using React and themoviedb.org API.",
+  "main": "server.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kdavidmoore/react-movie-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kdavidmoore/react-movie-app/issues"
+  },
+  "homepage": "https://github.com/kdavidmoore/react-movie-app#readme"
+}

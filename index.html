@@ -31,7 +31,7 @@
 				},
 				componentDidMount: function() {
 					this.serverRequest = $.get(NOW_PLAYING_URL + API_KEY, function(data) {
-						this.setState({posterPath: imgBaseUrl + 'w300' + data.results[this.props.item].poster_path});
+						this.setState({posterPath: imgBaseUrl + 'w300' + data.results[this.props.posterItem].poster_path});
 					}.bind(this));
 				},
 				componentWillUnmount: function() {
@@ -39,7 +39,7 @@
 				},
 				render: function() {
 					return (
-						<div>
+						<div className="three columns">
 							<img src={this.state.posterPath} />
 						</div>
 					);
@@ -50,10 +50,10 @@
 				render: function() {
 					return (
 						<div className="row">
-							<Poster className="three columns" item="0" />
-							<Poster className="three columns" item="1" />
-							<Poster className="three columns" item="2" />
-							<Poster className="three columns" item="3" />
+							<Poster posterItem="0" />
+							<Poster posterItem="1" />
+							<Poster posterItem="2" />
+							<Poster posterItem="3" />
 						</div>
 					);
 				}
