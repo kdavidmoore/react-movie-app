@@ -1,4 +1,4 @@
 .DS_Store
-keys.js
+scripts/api_key.js
 examples/*
 node_modules/*
