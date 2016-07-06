@@ -4,7 +4,8 @@
 		<meta charset="UTF-8" />
 		<title>Movie App</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-  		<link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css" />
 		<link type="text/css" rel="stylesheet" href="css/normalize.css" />
 		<link type="text/css" rel="stylesheet" href="css/skeleton.css" />
 		<link type="text/css" rel="stylesheet" href="css/styles.css" />
@@ -14,46 +15,91 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 		<script src="keys.js"></script>
 		<script src="config.js"></script>
+		<script src="node_modules/react-bootstrap/dist/react-bootstrap.min.js"></script>
 	</head>
-	<body>
+	<body">
 		<div class="container header">
-			<h1>Now Playing</h1>
+			<h1 class="text-center">Now Playing</h1>
 		</div>
 
-		<div id="gallery" class="container"></div>
+		<div id="gallery"></div>
 
 		<script type="text/babel">
+			const Button = ReactBootstrap.Button;
+			const Modal = ReactBootstrap.Modal;
+
 			var Poster = React.createClass({
 				getInitialState: function() {
 					return {
-						posterPath: ''
+						posterPath: '',
+						showModal: false
 					};
 				},
+
+				close() {
+					this.setState({ showModal: false });
+				},
+
+				open() {
+					this.setState({ showModal: true });
+				},
+
 				componentDidMount: function() {
 					this.serverRequest = $.get(NOW_PLAYING_URL + API_KEY, function(data) {
-						this.setState({posterPath: imgBaseUrl + 'w300' + data.results[this.props.posterItem].poster_path});
+						this.setState({
+							posterPath: imgBaseUrl + 'w300' + data.results[this.props.posterItem].poster_path,
+							movieTitle: data.results[this.props.posterItem].title,
+							movieDescription: data.results[this.props.posterItem].overview,
+							score: data.results[this.props.posterItem].vote_average
+						});
 					}.bind(this));
 				},
+
 				componentWillUnmount: function() {
 					this.serverRequest.abort();
 				},
+
 				render: function() {
 					return (
 						<div className="three columns">
-							<img src={this.state.posterPath} />
+							<a onClick={this.open}>
+								<img src={this.state.posterPath} alt={this.state.movieTitle} />
+							</a>
+
+							<Modal show={this.state.showModal} onHide={this.close}>
+								<Modal.Body>
+									<h4>{this.state.movieTitle}</h4>
+									<p>{this.state.movieDescription}</p>
+									<p><b>Score: {this.state.score}/5</b></p>
+								</Modal.Body>
+								<Modal.Footer>
+									<Button onClick={this.close}>Close</Button>
+								</Modal.Footer>
+							</Modal>
 						</div>
 					);
 				}
 			});
 
 			var Gallery = React.createClass({
+				
 				render: function() {
 					return (
-						<div className="row">
-							<Poster posterItem="0" />
-							<Poster posterItem="1" />
-							<Poster posterItem="2" />
-							<Poster posterItem="3" />
+						<div>
+							<div className="container">
+								<div className="row">
+									<Poster posterItem="0" />
+									<Poster posterItem="1" />
+									<Poster posterItem="2" />
+									<Poster posterItem="3" />
+								</div>
+								<div className="row">
+									<Poster posterItem="4" />
+									<Poster posterItem="5" />
+									<Poster posterItem="6" />
+									<Poster posterItem="7" />
+								</div>
+							</div>
 						</div>
 					);
 				}

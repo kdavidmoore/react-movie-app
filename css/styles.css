@@ -1,7 +1,18 @@
+body {
+	background-color: rgb(244,248,247);
+}
+h1 {
+	color: rgb(60,74,77);
+}
 img {
 	width: 100%;
 }
-
 .header {
-	padding-top: 15px;
+	padding: 10px 0 10px 0;
+}
+.row {
+	margin-bottom: 20px;
+}
+#gallery {
+	padding-bottom: 20px;
 }
