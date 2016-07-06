@@ -2,10 +2,14 @@
 
 A React-based movie app that uses themoviedb.org API to search and display movies.
 --------------------
-[demo here](https://kdavidmoore.com:8080)
+[demo here](http://kdavidmoore.com:8080)
 
 ## Example
 ![screenshot](http://i63.tinypic.com/25pr9zs.png)
+
+## Features
+* Displays poster images of "Now Playing" movies
+* Posters can be clicked to open a modal showing more information on each movie
 
 ## Third-party libraries
 * jQuery
