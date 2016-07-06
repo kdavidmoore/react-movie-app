@@ -32,7 +32,8 @@
 				getInitialState: function() {
 					return {
 						posterPath: '',
-						showModal: false
+						showModal: false,
+						hover: false
 					};
 				},
 
@@ -43,6 +44,14 @@
 				open() {
 					this.setState({ showModal: true });
 				},
+
+				mouseOver: function () {
+        			this.setState({ hover: true });
+    			},
+
+    			mouseLeave: function () {
+        			this.setState({ hover: false });
+    			},
 
 				componentDidMount: function() {
 					this.serverRequest = $.get(NOW_PLAYING_URL + API_KEY, function(data) {
@@ -60,9 +69,19 @@
 				},
 
 				render: function() {
+					var hoverStyle;
+					if (this.state.hover) {
+						hoverStyle = { cursor: 'pointer' }
+					} else {
+						hoverStyle = { cursor: 'default' }
+					}
 					return (
 						<div className="three columns">
-							<a onClick={this.open}>
+							<a
+							style={hoverStyle}
+							onClick={this.open}
+							onMouseEnter={this.mouseOver.bind(this)}
+							onMouseLeave={this.mouseLeave.bind(this)}>
 								<img src={this.state.posterPath} alt={this.state.movieTitle} />
 							</a>
 
@@ -70,7 +89,7 @@
 								<Modal.Body>
 									<h4>{this.state.movieTitle}</h4>
 									<p>{this.state.movieDescription}</p>
-									<p><b>Score: {this.state.score}/5</b></p>
+									<p><b>Score: {this.state.score}/10</b></p>
 								</Modal.Body>
 								<Modal.Footer>
 									<Button onClick={this.close}>Close</Button>
