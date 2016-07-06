@@ -43,19 +43,28 @@
 					this.setState({ showModal: true });
 				},
 				mouseOver: function() {
-        			this.setState({ hover: true });
-    			},
-    			mouseLeave: function() {
-        			this.setState({ hover: false });
-    			},
+					this.setState({ hover: true });
+				},
+				mouseLeave: function() {
+					this.setState({ hover: false });
+				},
 				componentDidMount: function() {
 					this.serverRequest = $.get(NOW_PLAYING_URL + API_KEY, function(data) {
+						var genreNames = "";
+						var genreIds = data.results[this.props.posterItem].genre_ids;
+						for (var j=0; j<genreIds.length; j++) {
+							if (genreIds.indexOf(genres[j].id) > -1) {
+								genreNames += genres[j].name;
+								genreNames += ", ";
+							}
+						}
+						genreNames = genreNames.slice(0, -2);
 						this.setState({
 							posterPath: imgBaseUrl + 'w300' + data.results[this.props.posterItem].poster_path,
 							movieTitle: data.results[this.props.posterItem].title,
 							movieDescription: data.results[this.props.posterItem].overview,
 							movieScore: data.results[this.props.posterItem].vote_average,
-							genreIds: data.results[this.props.posterItem].genre_ids
+							genres: genreNames
 						});
 					}.bind(this));
 				},
@@ -83,8 +92,11 @@
 								<Modal.Body>
 									<h4>{this.state.movieTitle}</h4>
 									<p>{this.state.movieDescription}</p>
-									<p><b>Genres:</b> {this.state.genreIds}</p>
-									<p><b>Score:</b> {this.state.movieScore}/10</p>
+									<p>
+										<b>Genres:</b> {this.state.genres}
+										<br />
+										<b>Score:</b> {this.state.movieScore}/10
+									</p>
 								</Modal.Body>
 								<Modal.Footer>
 									<Button onClick={this.close}>Close</Button>
