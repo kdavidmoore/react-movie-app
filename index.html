@@ -36,52 +36,46 @@
 						hover: false
 					};
 				},
-
-				close() {
+				close: function() {
 					this.setState({ showModal: false });
 				},
-
-				open() {
+				open: function() {
 					this.setState({ showModal: true });
 				},
-
-				mouseOver: function () {
+				mouseOver: function() {
         			this.setState({ hover: true });
     			},
-
-    			mouseLeave: function () {
+    			mouseLeave: function() {
         			this.setState({ hover: false });
     			},
-
 				componentDidMount: function() {
 					this.serverRequest = $.get(NOW_PLAYING_URL + API_KEY, function(data) {
 						this.setState({
 							posterPath: imgBaseUrl + 'w300' + data.results[this.props.posterItem].poster_path,
 							movieTitle: data.results[this.props.posterItem].title,
 							movieDescription: data.results[this.props.posterItem].overview,
-							score: data.results[this.props.posterItem].vote_average
+							movieScore: data.results[this.props.posterItem].vote_average,
+							genreIds: data.results[this.props.posterItem].genre_ids
 						});
 					}.bind(this));
 				},
-
 				componentWillUnmount: function() {
 					this.serverRequest.abort();
 				},
-
 				render: function() {
 					var hoverStyle;
 					if (this.state.hover) {
-						hoverStyle = { cursor: 'pointer' }
+						hoverStyle = { cursor: 'pointer' };
 					} else {
-						hoverStyle = { cursor: 'default' }
+						hoverStyle = { cursor: 'default' };
 					}
 					return (
 						<div className="three columns">
 							<a
 							style={hoverStyle}
 							onClick={this.open}
-							onMouseEnter={this.mouseOver.bind(this)}
-							onMouseLeave={this.mouseLeave.bind(this)}>
+							onMouseEnter={this.mouseOver}
+							onMouseLeave={this.mouseLeave}>
 								<img src={this.state.posterPath} alt={this.state.movieTitle} />
 							</a>
 
@@ -89,7 +83,8 @@
 								<Modal.Body>
 									<h4>{this.state.movieTitle}</h4>
 									<p>{this.state.movieDescription}</p>
-									<p><b>Score: {this.state.score}/10</b></p>
+									<p><b>Genres:</b> {this.state.genreIds}</p>
+									<p><b>Score:</b> {this.state.movieScore}/10</p>
 								</Modal.Body>
 								<Modal.Footer>
 									<Button onClick={this.close}>Close</Button>
@@ -101,7 +96,6 @@
 			});
 
 			var Gallery = React.createClass({
-				
 				render: function() {
 					return (
 						<div>
