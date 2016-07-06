@@ -2,7 +2,7 @@
 
 A React-based movie app that uses themoviedb.org API to search and display movies.
 -------
-[demo here](https://still-sierra-68199.herokuapp.com/)
+[demo here](https://kdavidmoore.com:8080)
 ![screenshot](http://i63.tinypic.com/25pr9zs.png)
 
 ## Third-party libraries
