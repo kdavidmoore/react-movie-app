@@ -1,8 +1,10 @@
 # React Movie App
 
 A React-based movie app that uses themoviedb.org API to search and display movies.
--------
+--------------------
 [demo here](https://kdavidmoore.com:8080)
+
+## Example
 ![screenshot](http://i63.tinypic.com/25pr9zs.png)
 
 ## Third-party libraries
@@ -12,7 +14,7 @@ A React-based movie app that uses themoviedb.org API to search and display movie
 * [React-Bootstrap](https://react-bootstrap.github.io/)
 * [Skeleton](http://getskeleton.com/)
 
-## Getting started
+## Installation
 Register with [themoviedb.org](https://www.themoviedb.org/account/signup) to get an API key and store the key in `scripts/api_key.js`:
 ```javascript
 const API_KEY = "my_api_key";

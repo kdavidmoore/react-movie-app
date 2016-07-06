@@ -20,8 +20,10 @@
   },
   "homepage": "https://github.com/kdavidmoore/react-movie-app#readme",
   "dependencies": {
+    "connect": "^3.4.1",
     "react": "^15.2.0",
     "react-bootstrap": "^0.29.5",
-    "react-dom": "^15.2.0"
+    "react-dom": "^15.2.0",
+    "serve-static": "^1.11.1"
   }
 }
