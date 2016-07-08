@@ -2,7 +2,7 @@
 
 A React-based movie app that uses themoviedb.org API to search and display movies.
 --------------------
-[demo here](http://kdavidmoore.com:8080)
+[demo here](http://movies.kdavidmoore.com)
 
 ## Example
 ![screenshot](http://i63.tinypic.com/25pr9zs.png)
