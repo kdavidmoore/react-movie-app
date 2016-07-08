@@ -13,8 +13,8 @@ img {
 .row {
 	margin-bottom: 20px;
 }
-#gallery {
-	padding-bottom: 20px;
+.row.zero {
+	min-height: 200px;
 }
 .centered {
 	text-align: center;

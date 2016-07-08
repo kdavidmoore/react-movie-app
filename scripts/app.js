@@ -103,7 +103,7 @@ var Gallery = React.createClass({
 		return (
 			<div>
 				<div className="container">
-					<div className="row">
+					<div className="row zero">
 						<div className="twelve columns centered">
 							<Typeahead
 								options={this.state.movieOptions}
@@ -111,17 +111,23 @@ var Gallery = React.createClass({
 							/>
 						</div>
 					</div>
-					<div className="row">
+					<div className="row one">
 						<Poster posterItem="0" />
 						<Poster posterItem="1" />
 						<Poster posterItem="2" />
 						<Poster posterItem="3" />
 					</div>
-					<div className="row">
+					<div className="row two">
 						<Poster posterItem="4" />
 						<Poster posterItem="5" />
 						<Poster posterItem="6" />
 						<Poster posterItem="7" />
+					</div>
+					<div className="row three">
+						<Poster posterItem="8" />
+						<Poster posterItem="9" />
+						<Poster posterItem="10" />
+						<Poster posterItem="11" />
 					</div>
 				</div>
 			</div>
