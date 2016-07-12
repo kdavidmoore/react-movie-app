@@ -35,17 +35,17 @@ var Poster = React.createClass({
 					onClick={this.open}
 					onMouseEnter={this.mouseOver}
 					onMouseLeave={this.mouseLeave}>
-					<img src={this.props.posterPath} alt={this.props.movieTitle} />
+					<img src={this.props.data.posterPath} alt={this.props.data.movieTitle} />
 				</a>
 
 				<Modal show={this.state.showModal} onHide={this.close}>
 					<Modal.Body>
-						<h4>{this.props.movieTitle}</h4>
-						<p>{this.props.movieDescription}</p>
+						<h4>{this.props.data.movieTitle}</h4>
+						<p>{this.props.data.movieDescription}</p>
 						<p>
-							<b>Genres:</b> {this.props.genres}
+							<b>Genres:</b> {this.props.data.genres}
 							<br />
-							<b>Score:</b> {this.props.movieScore}/10
+							<b>Score:</b> {this.props.data.movieScore}/10
 						</p>
 					</Modal.Body>
 					<Modal.Footer>
@@ -57,32 +57,18 @@ var Poster = React.createClass({
 	}
 });
 
+var postersToShow = [];
 var Gallery = React.createClass({
 	getInitialState: function() {
 		return {
-			movieOptions: [],
-			posterPaths: [],
-			movieTitles: [],
-			movieDescriptions: [],
-			genres: [],
-			movieScores: []
+			movieOptions: []
 		};
 	},
 	componentDidMount: function() {
 		this.serverRequest = $.get(NOW_PLAYING_URL + API_KEY, function(data) {
 			var movieOptions = [];
-			var genreData = [];
-			var posterPaths = [];
-			var movieTitles = [];
-			var movieDescriptions = [];
-			var movieScores = [];
-
 			for (var i=0; i<data.results.length; i++) {
 				movieOptions.push(data.results[i].title);
-				posterPaths.push(imgBaseUrl + 'w300' + data.results[i].poster_path);
-				movieTitles.push(data.results[i].title);
-				movieDescriptions.push(data.results[i].overview);
-				movieScores.push(data.results[i].vote_average);
 				// generate strings containing genre names for each movie
 				var genreNames = "";
 				var genreIds = data.results[i].genre_ids;
@@ -93,17 +79,17 @@ var Gallery = React.createClass({
 					}
 				}
 				genreNames = genreNames.slice(0, -2);
-				genreData.push(genreNames);
+				
+				postersToShow.push({
+					id: i,
+					posterPath: imgBaseUrl + 'w300' + data.results[i].poster_path,
+					movieTitle: data.results[i].title,
+					movieDescription: data.results[i].overview,
+					movieScore: data.results[i].vote_average,
+					genres: genreNames
+				});
 			}
-
-			this.setState({
-				movieOptions: movieOptions,
-				posterPaths: posterPaths,
-				movieTitles: movieTitles,
-				movieDescriptions: movieDescriptions,
-				movieScores: movieScores,
-				genres: genreData
-			});
+			this.setState({ movieOptions: movieOptions });
 		}.bind(this));
 	},
 	componentWillUnmount: function() {
@@ -122,34 +108,9 @@ var Gallery = React.createClass({
 						</div>
 					</div>
 					<div className="row one">
-						<Poster
-							posterPath={this.state.posterPaths[0]}
-							movieTitle={this.state.movieTitles[0]}
-							movieDescription={this.state.movieDescriptions[0]}
-							genres={this.state.genres[0]}
-							movieScore={this.state.movieScores[0]}
-						/>
-						<Poster
-							posterPath={this.state.posterPaths[1]}
-							movieTitle={this.state.movieTitles[1]}
-							movieDescription={this.state.movieDescriptions[1]}
-							genres={this.state.genres[1]}
-							movieScore={this.state.movieScores[1]}
-						/>
-						<Poster
-							posterPath={this.state.posterPaths[2]}
-							movieTitle={this.state.movieTitles[2]}
-							movieDescription={this.state.movieDescriptions[2]}
-							genres={this.state.genres[2]}
-							movieScore={this.state.movieScores[2]}
-						/>
-						<Poster
-							posterPath={this.state.posterPaths[3]}
-							movieTitle={this.state.movieTitles[3]}
-							movieDescription={this.state.movieDescriptions[3]}
-							genres={this.state.genres[3]}
-							movieScore={this.state.movieScores[3]}
-						/>
+						{this.props.results.map(function(result) {
+							return <Poster key={result.id} data={result} />;
+						})}
 					</div>
 				</div>
 			</div>
@@ -158,6 +119,6 @@ var Gallery = React.createClass({
 });
 
 ReactDOM.render(
-	<Gallery />,
+	<Gallery results={postersToShow} />,
 	document.getElementById('gallery')
 );
