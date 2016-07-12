@@ -29,7 +29,7 @@ var Poster = React.createClass({
 			hoverStyle = { cursor: 'default' };
 		}
 		return (
-			<div className="three columns">
+			<div className="three my-columns">
 				<a
 					style={hoverStyle}
 					onClick={this.open}
@@ -99,7 +99,7 @@ var Gallery = React.createClass({
 		return (
 			<div>
 				<div className="container">
-					<div className="row zero">
+					<div className="row typeahead">
 						<div className="twelve columns centered">
 							<Typeahead
 								options={this.state.movieOptions}
@@ -107,7 +107,7 @@ var Gallery = React.createClass({
 							/>
 						</div>
 					</div>
-					<div className="row one">
+					<div className="my-row">
 						{this.props.results.map(function(result) {
 							return <Poster key={result.id} data={result} />;
 						})}

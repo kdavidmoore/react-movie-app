@@ -1,3 +1,6 @@
+* {
+	box-sizing: border-box;
+}
 body {
 	background-color: rgb(244,248,247);
 }
@@ -6,20 +9,26 @@ h1 {
 }
 img {
 	width: 100%;
+	height: 350px;
 }
 .header {
 	padding: 10px 0 10px 0;
 }
-.row {
-	margin-bottom: 20px;
-}
-.row.zero {
+.row.typeahead {
 	min-height: 200px;
+}
+.my-row:before, 
+.my-row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+.my-columns {
+	float: left;
+}
+.three.my-columns {
+	width: 25%;
 }
 .centered {
 	text-align: center;
-}
-.columns {
-	margin: 0 0 30px 0;
-	padding: 0px;
 }
