@@ -5,7 +5,6 @@ const Typeahead = ReactTypeahead.Typeahead;
 var Poster = React.createClass({
 	getInitialState: function() {
 		return {
-			posterPath: '',
 			showModal: false,
 			hover: false
 		};
@@ -22,29 +21,6 @@ var Poster = React.createClass({
 	mouseLeave: function() {
 		this.setState({ hover: false });
 	},
-	componentDidMount: function() {
-		this.serverRequest = $.get(NOW_PLAYING_URL + API_KEY, function(data) {
-			var genreNames = "";
-			var genreIds = data.results[this.props.posterItem].genre_ids;
-			for (var i=0; i<genreIds.length; i++) {
-				if (genreIds.indexOf(genres[i].id) > -1) {
-					genreNames += genres[i].name;
-					genreNames += ", ";
-				}
-			}
-			genreNames = genreNames.slice(0, -2);
-			this.setState({
-				posterPath: imgBaseUrl + 'w300' + data.results[this.props.posterItem].poster_path,
-				movieTitle: data.results[this.props.posterItem].title,
-				movieDescription: data.results[this.props.posterItem].overview,
-				movieScore: data.results[this.props.posterItem].vote_average,
-				genres: genreNames
-			});
-		}.bind(this));
-	},
-	componentWillUnmount: function() {
-		this.serverRequest.abort();
-	},
 	render: function() {
 		var hoverStyle;
 		if (this.state.hover) {
@@ -55,21 +31,21 @@ var Poster = React.createClass({
 		return (
 			<div className="three columns">
 				<a
-				style={hoverStyle}
-				onClick={this.open}
-				onMouseEnter={this.mouseOver}
-				onMouseLeave={this.mouseLeave}>
-					<img src={this.state.posterPath} alt={this.state.movieTitle} />
+					style={hoverStyle}
+					onClick={this.open}
+					onMouseEnter={this.mouseOver}
+					onMouseLeave={this.mouseLeave}>
+					<img src={this.props.data.posterPath} alt={this.props.data.movieTitle} />
 				</a>
 
 				<Modal show={this.state.showModal} onHide={this.close}>
 					<Modal.Body>
-						<h4>{this.state.movieTitle}</h4>
-						<p>{this.state.movieDescription}</p>
+						<h4>{this.props.data.movieTitle}</h4>
+						<p>{this.props.data.movieDescription}</p>
 						<p>
-							<b>Genres:</b> {this.state.genres}
+							<b>Genres:</b> {this.props.data.genres}
 							<br />
-							<b>Score:</b> {this.state.movieScore}/10
+							<b>Score:</b> {this.props.data.movieScore}/10
 						</p>
 					</Modal.Body>
 					<Modal.Footer>
@@ -81,6 +57,7 @@ var Poster = React.createClass({
 	}
 });
 
+var postersToShow = [];
 var Gallery = React.createClass({
 	getInitialState: function() {
 		return {
@@ -92,6 +69,25 @@ var Gallery = React.createClass({
 			var movieOptions = [];
 			for (var i=0; i<data.results.length; i++) {
 				movieOptions.push(data.results[i].title);
+				// generate strings containing genre names for each movie
+				var genreNames = "";
+				var genreIds = data.results[i].genre_ids;
+				for (var j=0; j<genreIds.length; j++) {
+					if (genreIds.indexOf(genres[j].id) > -1) {
+						genreNames += genres[j].name;
+						genreNames += ", ";
+					}
+				}
+				genreNames = genreNames.slice(0, -2);
+				
+				postersToShow.push({
+					id: i,
+					posterPath: imgBaseUrl + 'w300' + data.results[i].poster_path,
+					movieTitle: data.results[i].title,
+					movieDescription: data.results[i].overview,
+					movieScore: data.results[i].vote_average,
+					genres: genreNames
+				});
 			}
 			this.setState({ movieOptions: movieOptions });
 		}.bind(this));
@@ -112,22 +108,9 @@ var Gallery = React.createClass({
 						</div>
 					</div>
 					<div className="row one">
-						<Poster posterItem="0" />
-						<Poster posterItem="1" />
-						<Poster posterItem="2" />
-						<Poster posterItem="3" />
-					</div>
-					<div className="row two">
-						<Poster posterItem="4" />
-						<Poster posterItem="5" />
-						<Poster posterItem="6" />
-						<Poster posterItem="7" />
-					</div>
-					<div className="row three">
-						<Poster posterItem="8" />
-						<Poster posterItem="9" />
-						<Poster posterItem="10" />
-						<Poster posterItem="11" />
+						{this.props.results.map(function(result) {
+							return <Poster key={result.id} data={result} />;
+						})}
 					</div>
 				</div>
 			</div>
@@ -136,6 +119,6 @@ var Gallery = React.createClass({
 });
 
 ReactDOM.render(
-	<Gallery />,
+	<Gallery results={postersToShow} />,
 	document.getElementById('gallery')
 );
