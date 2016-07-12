@@ -13,6 +13,13 @@ img {
 .row {
 	margin-bottom: 20px;
 }
-#gallery {
-	padding-bottom: 20px;
+.row.zero {
+	min-height: 200px;
+}
+.centered {
+	text-align: center;
+}
+.columns {
+	margin: 0 0 30px 0;
+	padding: 0px;
 }
