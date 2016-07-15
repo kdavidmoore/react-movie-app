@@ -24,6 +24,7 @@
     "react": "^15.2.0",
     "react-bootstrap": "^0.29.5",
     "react-dom": "^15.2.0",
+    "react-typeahead": "^2.0.0-alpha.5",
     "serve-static": "^1.11.1"
   }
 }
