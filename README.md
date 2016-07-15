@@ -5,17 +5,21 @@ A React-based movie app that uses themoviedb.org API to search and display movie
 [demo here](http://movies.kdavidmoore.com)
 
 ## Example
-![screenshot](http://i63.tinypic.com/25pr9zs.png)
+![screenshot](http://i66.tinypic.com/2vtnl9l.png)
 
 ## Features
 * Displays poster images of "Now Playing" movies
 * Posters can be clicked to open a modal showing more information on each movie
+* Typeahead can be used to search for Now Playing movies
+* When typeahead option is selected, only the poster for the selected movie is shown
+* Reset button can be used to retrieve unfiltered list of Now Playing movies
 
 ## Third-party libraries
 * jQuery
 * [React](https://facebook.github.io/react/)
 * [React-DOM](https://www.npmjs.com/package/react-dom)
 * [React-Bootstrap](https://react-bootstrap.github.io/)
+* [react-typeahead](https://github.com/fmoo/react-typeahead)
 * [Skeleton](http://getskeleton.com/)
 
 ## Installation
