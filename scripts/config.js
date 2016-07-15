@@ -13,4 +13,3 @@ var genres;
 $.getJSON(GENRES_URL + API_KEY, function(data) {
 	genres = data.genres;
 });
-//SEARCH_URL + API_KEY + "&query=" + encodeURI(this.props.moviesToShow) + "&page=1"

@@ -99,16 +99,78 @@ var Gallery = React.createClass({
 	componentWillUnmount: function() {
 		this.serverRequest.abort();
 	},
+	filterMovies: function(option) {
+		var selectedMovie = [];
+		this.serverRequest = $.get(SEARCH_URL + API_KEY + "&query=" + encodeURI(option) + "&page=1", function(data) {
+			var genreNames = "";
+			var genreIds = data.results[0].genre_ids;
+			for (var j=0; j<genreIds.length; j++) {
+				if (genreIds.indexOf(genres[j].id) > -1) {
+					genreNames += genres[j].name;
+					genreNames += ", ";
+				}
+			}
+			genreNames = genreNames.slice(0, -2);
+
+			selectedMovie.push({
+				id: 0,
+				posterPath: imgBaseUrl + 'w300' + data.results[0].poster_path,
+				movieTitle: data.results[0].title,
+				movieDescription: data.results[0].overview,
+				movieScore: data.results[0].vote_average,
+				genres: genreNames
+			});
+			this.setState({ postersToShow: selectedMovie });
+		}.bind(this));
+	},
+	resetFilter: function() {
+		// It is bad to copy and paste large blocks of code.
+		// Do not try this at home.
+		this.serverRequest = $.get(NOW_PLAYING_URL + API_KEY, function(data) {
+			var movieOptions = [];
+			var postersToShow = [];
+			for (var i=0; i<data.results.length; i++) {
+				movieOptions.push(data.results[i].title);
+				// generate strings containing genre names for each movie
+				var genreNames = "";
+				var genreIds = data.results[i].genre_ids;
+				for (var j=0; j<genreIds.length; j++) {
+					if (genreIds.indexOf(genres[j].id) > -1) {
+						genreNames += genres[j].name;
+						genreNames += ", ";
+					}
+				}
+				genreNames = genreNames.slice(0, -2);
+
+				postersToShow.push({
+					id: i,
+					posterPath: imgBaseUrl + 'w300' + data.results[i].poster_path,
+					movieTitle: data.results[i].title,
+					movieDescription: data.results[i].overview,
+					movieScore: data.results[i].vote_average,
+					genres: genreNames
+				});
+			}
+			this.setState({
+				movieOptions: movieOptions,
+				postersToShow: postersToShow
+			});
+		}.bind(this));
+	},
 	render: function() {
 		return (
 			<div>
 				<div className="container">
 					<div className="row typeahead">
 						<div className="twelve columns centered">
-							<Typeahead
-								options={this.state.movieOptions}
-								maxVisible={3}
-							/>
+							<div className="th-wrapper">
+								<Typeahead
+									options={this.state.movieOptions}
+									maxVisible={3}
+									onOptionSelected={this.filterMovies}
+								/>
+								<button onClick={this.resetFilter}>Reset</button>
+							</div>
 						</div>
 					</div>
 					<div className="my-row">

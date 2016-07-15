@@ -17,7 +17,7 @@ img {
 .row.typeahead {
 	min-height: 200px;
 }
-.my-row:before, 
+.my-row:before,
 .my-row:after {
 	content: "";
 	display: table;
@@ -31,4 +31,24 @@ img {
 }
 .centered {
 	text-align: center;
+}
+@media screen and (min-width: 768px) {
+	.th-wrapper > * {
+		display: inline;
+	}
+	.th-wrapper > button {
+		position: relative;
+		top: -1px;
+		margin-left: 5px;
+	}
+}
+@media screen and (max-width: 767px) {
+	.three.my-columns {
+		width: 100%;
+	}
+}
+@media screen and (min-width: 767px) and (max-width: 1023px) {
+	.three.my-columns {
+		width: 33%;
+	}
 }
