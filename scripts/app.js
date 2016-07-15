@@ -57,16 +57,17 @@ var Poster = React.createClass({
 	}
 });
 
-var postersToShow = [];
 var Gallery = React.createClass({
 	getInitialState: function() {
 		return {
-			movieOptions: []
+			movieOptions: [],
+			postersToShow: []
 		};
 	},
 	componentDidMount: function() {
 		this.serverRequest = $.get(NOW_PLAYING_URL + API_KEY, function(data) {
 			var movieOptions = [];
+			var postersToShow = [];
 			for (var i=0; i<data.results.length; i++) {
 				movieOptions.push(data.results[i].title);
 				// generate strings containing genre names for each movie
@@ -79,7 +80,7 @@ var Gallery = React.createClass({
 					}
 				}
 				genreNames = genreNames.slice(0, -2);
-				
+
 				postersToShow.push({
 					id: i,
 					posterPath: imgBaseUrl + 'w300' + data.results[i].poster_path,
@@ -89,7 +90,10 @@ var Gallery = React.createClass({
 					genres: genreNames
 				});
 			}
-			this.setState({ movieOptions: movieOptions });
+			this.setState({
+				movieOptions: movieOptions,
+				postersToShow: postersToShow
+			});
 		}.bind(this));
 	},
 	componentWillUnmount: function() {
@@ -108,7 +112,7 @@ var Gallery = React.createClass({
 						</div>
 					</div>
 					<div className="my-row">
-						{this.props.results.map(function(result) {
+						{this.state.postersToShow.map(function(result) {
 							return <Poster key={result.id} data={result} />;
 						})}
 					</div>
@@ -119,6 +123,6 @@ var Gallery = React.createClass({
 });
 
 ReactDOM.render(
-	<Gallery results={postersToShow} />,
+	<Gallery />,
 	document.getElementById('gallery')
 );
