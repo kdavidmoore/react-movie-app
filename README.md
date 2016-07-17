@@ -1,6 +1,6 @@
 # React Movie App
 
-A React-based movie app that uses themoviedb.org API to search and display movies.
+A React-based movie app displays "Now Playing" movies from themoviedb.org API.
 --------------------
 [demo here](http://movies.kdavidmoore.com)
 
@@ -15,12 +15,12 @@ A React-based movie app that uses themoviedb.org API to search and display movie
 * Reset button can be used to retrieve unfiltered list of Now Playing movies
 
 ## Third-party libraries
-* jQuery
 * [React](https://facebook.github.io/react/)
 * [React-DOM](https://www.npmjs.com/package/react-dom)
-* [React-Bootstrap](https://react-bootstrap.github.io/)
 * [react-typeahead](https://github.com/fmoo/react-typeahead)
-* [Skeleton](http://getskeleton.com/)
+* [React-Bootstrap](https://react-bootstrap.github.io/) (just for the modals)
+* [Skeleton](http://getskeleton.com/) (for the cool fonts--this is sheer laziness)
+* jQuery (just for the $.getJSON method)
 
 ## Installation
 Register with [themoviedb.org](https://www.themoviedb.org/account/signup) to get an API key and store the key in `scripts/api_key.js`:

@@ -124,8 +124,7 @@ var Gallery = React.createClass({
 		}.bind(this));
 	},
 	resetFilter: function() {
-		// It is bad to copy and paste large blocks of code.
-		// Do not try this at home.
+		// copied and pasted from the componentDidMount function -- don't try this at home
 		this.serverRequest = $.get(NOW_PLAYING_URL + API_KEY, function(data) {
 			var movieOptions = [];
 			var postersToShow = [];

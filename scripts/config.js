@@ -4,11 +4,13 @@ const NOW_PLAYING_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=
 const GENRES_URL = "https://api.themoviedb.org/3/genre/movie/list?api_key=";
 const SEARCH_URL = "http://api.themoviedb.org/3/search/movie?api_key=";
 // go to the config endpoint and retrieve the base url for poster images
+// using a global variable -- don't try this at home
 var imgBaseUrl;
 $.getJSON(CONFIG_URL + API_KEY, function(data) {
 	imgBaseUrl = data.images.base_url;
 });
 // go to the genres endpoint and retrieve an array of movie genres and their ids
+// using a global variable -- don't try this at home
 var genres;
 $.getJSON(GENRES_URL + API_KEY, function(data) {
 	genres = data.genres;
