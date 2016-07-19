@@ -14,9 +14,6 @@ img {
 .header {
 	padding: 10px 0 10px 0;
 }
-.row.typeahead {
-	min-height: 200px;
-}
 .my-row:before,
 .my-row:after {
 	content: "";
@@ -32,9 +29,23 @@ img {
 .centered {
 	text-align: center;
 }
+.typeahead-selector > li {
+	list-style-type: none;
+}
 @media screen and (min-width: 768px) {
 	.typeahead {
 		display: inline;
+	}
+	.typeahead-selector {
+		position: absolute;
+		left: 47%;
+		z-index: 999;
+		background-color: white;
+		border-radius: 5px;
+		-webkit-box-shadow: 1px 1px 15px 0px rgba(0,0,0,0.75);
+		-moz-box-shadow: 1px 1px 15px 0px rgba(0,0,0,0.75);
+		box-shadow: 1px 1px 15px 0px rgba(0,0,0,0.75);
+		padding: 5px;
 	}
 	.th-wrapper > button {
 		display: inline;
