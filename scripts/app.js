@@ -22,7 +22,7 @@ var Poster = React.createClass({
 		this.setState({ hover: false });
 	},
 	render: function() {
-		var hoverStyle;
+		let hoverStyle;
 		if (this.state.hover) {
 			hoverStyle = { cursor: 'pointer' };
 		} else {
@@ -66,14 +66,14 @@ var Gallery = React.createClass({
 	},
 	componentDidMount: function() {
 		this.serverRequest = $.get(NOW_PLAYING_URL + API_KEY, function(data) {
-			var movieOptions = [];
-			var postersToShow = [];
-			for (var i=0; i<data.results.length; i++) {
+			let movieOptions = [];
+			let postersToShow = [];
+			for (let i=0; i<data.results.length; i++) {
 				movieOptions.push(data.results[i].title);
 				// generate strings containing genre names for each movie
-				var genreNames = "";
-				var genreIds = data.results[i].genre_ids;
-				for (var j=0; j<genreIds.length; j++) {
+				let genreNames = "";
+				let genreIds = data.results[i].genre_ids;
+				for (let j=0; j<genreIds.length; j++) {
 					if (genreIds.indexOf(genres[j].id) > -1) {
 						genreNames += genres[j].name;
 						genreNames += ", ";
@@ -100,11 +100,11 @@ var Gallery = React.createClass({
 		this.serverRequest.abort();
 	},
 	filterMovies: function(option) {
-		var selectedMovie = [];
+		let selectedMovie = [];
 		this.serverRequest = $.get(SEARCH_URL + API_KEY + "&query=" + encodeURI(option) + "&page=1", function(data) {
-			var genreNames = "";
-			var genreIds = data.results[0].genre_ids;
-			for (var j=0; j<genreIds.length; j++) {
+			let genreNames = "";
+			let genreIds = data.results[0].genre_ids;
+			for (let j=0; j<genreIds.length; j++) {
 				if (genreIds.indexOf(genres[j].id) > -1) {
 					genreNames += genres[j].name;
 					genreNames += ", ";
@@ -126,14 +126,14 @@ var Gallery = React.createClass({
 	resetFilter: function() {
 		// copied and pasted from the componentDidMount function -- don't try this at home
 		this.serverRequest = $.get(NOW_PLAYING_URL + API_KEY, function(data) {
-			var movieOptions = [];
-			var postersToShow = [];
-			for (var i=0; i<data.results.length; i++) {
+			let movieOptions = [];
+			let postersToShow = [];
+			for (let i=0; i<data.results.length; i++) {
 				movieOptions.push(data.results[i].title);
 				// generate strings containing genre names for each movie
-				var genreNames = "";
-				var genreIds = data.results[i].genre_ids;
-				for (var j=0; j<genreIds.length; j++) {
+				let genreNames = "";
+				let genreIds = data.results[i].genre_ids;
+				for (let j=0; j<genreIds.length; j++) {
 					if (genreIds.indexOf(genres[j].id) > -1) {
 						genreNames += genres[j].name;
 						genreNames += ", ";
@@ -163,12 +163,12 @@ var Gallery = React.createClass({
 					<div className="row typeahead">
 						<div className="twelve columns centered">
 							<div className="th-wrapper">
+								<button onClick={this.resetFilter}>Reset</button>
 								<Typeahead
 									options={this.state.movieOptions}
 									maxVisible={3}
 									onOptionSelected={this.filterMovies}
 								/>
-								<button onClick={this.resetFilter}>Reset</button>
 							</div>
 						</div>
 					</div>
