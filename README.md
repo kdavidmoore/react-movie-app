@@ -5,7 +5,7 @@ A React-based movie app displays "Now Playing" movies from themoviedb.org API.
 [demo here](http://movies.kdavidmoore.com)
 
 ## Example
-![screenshot](http://i66.tinypic.com/2vtnl9l.png)
+![screenshot](http://i65.tinypic.com/35d5e6t.gif)
 
 ## Features
 * Displays poster images of "Now Playing" movies
