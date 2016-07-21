@@ -29,7 +29,7 @@ var Poster = React.createClass({
 			hoverStyle = { cursor: 'default' };
 		}
 		return (
-			<div className="three my-columns">
+			<div className="add-margin col-xs-12 col-sm-6 col-md-4 col-lg-3">
 				<a
 					style={hoverStyle}
 					onClick={this.open}
@@ -161,9 +161,9 @@ var Gallery = React.createClass({
 			<div>
 				<div className="container">
 					<div className="row typeahead">
-						<div className="twelve columns centered">
+						<div className="col-sm-12 text-center">
 							<div className="th-wrapper">
-								<button onClick={this.resetFilter}>Reset</button>
+								<button className="button" onClick={this.resetFilter}>Reset</button>
 								<Typeahead
 									options={this.state.movieOptions}
 									maxVisible={3}

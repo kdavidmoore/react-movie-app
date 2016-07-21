@@ -18,9 +18,9 @@ A React-based movie app displays "Now Playing" movies from themoviedb.org API.
 * [React](https://facebook.github.io/react/)
 * [React-DOM](https://www.npmjs.com/package/react-dom)
 * [react-typeahead](https://github.com/fmoo/react-typeahead)
-* [React-Bootstrap](https://react-bootstrap.github.io/) (just for the modals)
-* [Skeleton](http://getskeleton.com/) (for the cool fonts--this is sheer laziness)
-* jQuery (just for the $.getJSON method)
+* [React-Bootstrap](https://react-bootstrap.github.io/) (for the modals and grid system)
+* [Skeleton](http://getskeleton.com/) (cut/pasted the form styling and button styling)
+* jQuery (for the $.getJSON method)
 
 ## Installation
 Register with [themoviedb.org](https://www.themoviedb.org/account/signup) to get an API key and store the key in `scripts/api_key.js`:
