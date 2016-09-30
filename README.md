@@ -23,16 +23,17 @@ A React-based movie app displays "Now Playing" movies from themoviedb.org API.
 * jQuery (for the $.getJSON method)
 
 ## Installation
+Clone the repository and install package dependencies:
+```shell
+git clone https://github.com/kdavidmoore/react-movie-app.git react-movie-app
+npm install
+```
 Register with [themoviedb.org](https://www.themoviedb.org/account/signup) to get an API key and store the key in `scripts/api_key.js`:
 ```javascript
-const API_KEY = "my_api_key";
+var API_KEY = "my_api_key";
 ```
-Open a terminal window and install the Node dependencies:
+Then start the Node server:
 ```shell
-cd my_project_directory && npm install
-```
-Then start the Node server using nodemon:
-```shell
-nodemon
+node server.js
 ```
 Finally, the app should render when you open a browser window pointing to `http://localhost:8080`
