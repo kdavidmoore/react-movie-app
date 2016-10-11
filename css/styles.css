@@ -1,34 +1,43 @@
 * {
 	box-sizing: border-box;
 }
+
 body {
 	background-color: rgb(244,248,247);
 	font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
 h1 {
 	color: rgb(60,74,77);
 }
+
 img {
 	width: 100%;
 	height: 350px;
 }
+
 .typeahead-selector > li {
 	list-style-type: none;
 }
+
 .add-margin {
 	margin-bottom: 10px;
 }
+
 .th-wrapper {
 	padding-bottom: 20px;
 	min-height: 120px;
 }
+
 .th-wrapper > button {
 	margin-bottom: 5px;
 }
+
 @media screen and (min-width: 768px) {
 	.typeahead {
 		display: inline;
 	}
+	
 	.th-wrapper > button {
 		display: inline;
 		position: relative;
