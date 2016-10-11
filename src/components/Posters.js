@@ -1,15 +1,19 @@
 import React, { PropTypes } from 'react'
 import Poster from './Poster'
 
-const Gallery = ({ posters, onPosterClick }) => (
-  <div className="gallery">
+const Posters = ({ posters, onPosterClick }) => (
+  <div>
     {posters.map(poster =>
-      <Poster key={poster.id} data={poster} />
+      <Poster
+        key={poster.id}
+        {...poster}
+        onClick={() => onPosterClick(poster.id)}
+      />
     )}
   </div>
 )
 
-Gallery.propTypes = {
+Posters.propTypes = {
   posters: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     imgSrc: PropTypes.string.isRequired,
@@ -20,4 +24,4 @@ Gallery.propTypes = {
   onPosterClick: PropTypes.func.isRequired
 }
 
-export default Gallery
+export default Posters

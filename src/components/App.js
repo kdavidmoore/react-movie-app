@@ -1,11 +1,11 @@
 import React from 'react'
 import Filter from './Filter'
-import Gallery from './Gallery'
+import VisiblePosters from '../containers/VisiblePosters'
 
 const App = () => (
   <div>
     <Filter />
-    <Gallery />
+    <VisiblePosters />
   </div>
 )
 

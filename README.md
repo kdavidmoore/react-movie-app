@@ -1,6 +1,7 @@
-# React Movie App
+# React-Redux Movie App
 
-A React-based movie app displays "Now Playing" movies from themoviedb.org API.
+A movie app, built using React and Redux, that displays "Now Playing" movies from themoviedb.org API.
+
 --------------------
 [demo here](http://movies.kdavidmoore.com)
 
@@ -14,25 +15,26 @@ A React-based movie app displays "Now Playing" movies from themoviedb.org API.
 * When typeahead option is selected, only the poster for the selected movie is shown
 * Reset button can be used to retrieve unfiltered list of Now Playing movies
 
-## Third-party libraries
-* [React](https://facebook.github.io/react/)
-* [React-DOM](https://www.npmjs.com/package/react-dom)
+## Built with
+* react
+* redux
+* react-redux
+* babel
+* webpack
+* babel-preset-react
+* babel-preset-es2015
+* babel-plugin-transform-object-rest-spread
 * [react-typeahead](https://github.com/fmoo/react-typeahead)
-* [React-Bootstrap](https://react-bootstrap.github.io/) (for the modals and grid system)
+* [react-bootstrap](https://react-bootstrap.github.io/) (for the modals and grid system)
+* Bootstrap
 * [Skeleton](http://getskeleton.com/) (cut/pasted the form styling and button styling)
 * jQuery (for the $.getJSON method)
 
 ## Installation
-Register with [themoviedb.org](https://www.themoviedb.org/account/signup) to get an API key and store the key in `scripts/api_key.js`:
-```javascript
-const API_KEY = "my_api_key";
-```
-Open a terminal window and install the Node dependencies:
+Register with [themoviedb.org](https://www.themoviedb.org/account/signup) to get an API key. Place the API key in `scripts/API_KEY.js`.
+
 ```shell
-cd my_project_directory && npm install
+npm install
+webpack
 ```
-Then start the Node server using nodemon:
-```shell
-nodemon
-```
-Finally, the app should render when you open a browser window pointing to `http://localhost:8080`
+Then open `index.html` in a browser.

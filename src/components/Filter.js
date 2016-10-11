@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import Typeahead from 'react-typeahead'
 
 const Filter = ({ onResetClick, filterOptions, applyFilter }) => (
   <div className="row typeahead">

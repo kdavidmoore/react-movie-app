@@ -1,29 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8" />
-		<title>Movie App</title>
+		<meta charset="utf-8" />
+		<title>Now Playing</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css" />
 		<link href="css/skeleton-forms.css" rel="stylesheet" />
 		<link type="text/css" rel="stylesheet" href="css/styles.css" />
-		<script src="build/react.js"></script>
-		<script src="build/react-dom.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-		<script src="scripts/api_key.js"></script>
-		<script src="scripts/config.js"></script>
-		<script src="node_modules/react-bootstrap/dist/react-bootstrap.min.js"></script>
-		<script src="node_modules/react-typeahead/dist/react-typeahead.js"></script>
 	</head>
 	<body>
 		<div class="container header">
 			<h1 class="text-center">Now Playing</h1>
 		</div>
 
-		<div id="gallery"></div>
+		<div id="root"></div>
 
-		<script type="text/babel" src="scripts/app.js"></script>
+		<script src="bin/app.bundle.js"></script>
 	</body>
 </html>

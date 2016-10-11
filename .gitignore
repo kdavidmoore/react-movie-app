@@ -1,4 +1,4 @@
 .DS_Store
-scripts/api_key.js
-examples
+scripts/API_KEY.js
+bin
 node_modules
